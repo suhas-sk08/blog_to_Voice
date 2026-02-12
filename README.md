@@ -1,12 +1,12 @@
 # Blog to Podcast Generator
 
-Convert any blog article into an AI-generated podcast with just one click! This Streamlit app uses Google Gemini AI to summarize blog content and ElevenLabs to convert it into natural-sounding speech.
+Convert any blog article into an AI-generated podcast with just one click! This Streamlit app uses Google Gemini AI to summarize blog content and Google TTS to convert it into natural-sounding speech.
 
 ## ✨ Features
 
 - 🌐 **Scrape any blog URL** - Automatically extracts content using Firecrawl
 - 🤖 **AI-powered summarization** - Google Gemini creates engaging podcast scripts
-- 🎙️ **Text-to-Speech** - ElevenLabs converts summaries to high-quality audio
+- 🎙️ **Text-to-Speech** - Google TTS converts summaries to high-quality audio
 - 📥 **Download MP3** - Save podcasts for offline listening
 - 🆓 **100% FREE APIs** - All services have generous free tiers
 
@@ -29,7 +29,7 @@ cd blog_to_Voice
 2. **Install required packages**
 
 ```bash
-pip install streamlit google-genai elevenlabs firecrawl-py
+pip install streamlit google-genai gTTS firecrawl-py
 ```
 
 ### Running the App
@@ -49,15 +49,8 @@ The app will open in your default browser at `http://localhost:8501`
 - Copy the key (starts with `AIza...`)
 - **Free Tier:** 60 requests/minute, 1,500 requests/day
 
-### 2. ElevenLabs API Key (FREE)
 
-- Visit: https://elevenlabs.io/
-- Sign up for a free account
-- Go to Profile → API Keys
-- Copy your API key
-- **Free Tier:** 10,000 characters/month
-
-### 3. Firecrawl API Key (FREE)
+### 2. Firecrawl API Key (FREE)
 
 - Visit: https://firecrawl.dev/
 - Sign up for a free account
@@ -77,7 +70,7 @@ The app will open in your default browser at `http://localhost:8501`
 ```
 streamlit>=1.30.0
 google-genai>=0.3.0
-elevenlabs>=1.0.0
+gTTS>=2.5.0
 firecrawl-py>=0.0.5
 ```
 
@@ -86,20 +79,20 @@ firecrawl-py>=0.0.5
 ### Architecture
 
 ```
-Blog URL → Firecrawl (Scraping) → Gemini AI (Summarization) → ElevenLabs (TTS) → Audio Output
+Blog URL → Firecrawl (Scraping) → Gemini AI (Summarization) → Google TTS (TTS) → Audio Output
 ```
 
 ### Models Used
 
 - **Gemini**: `models/gemini-flash-latest` (Fast & Free)
-- **ElevenLabs Voice**: `JBFqnCBsd6RMkjVDRZzb` (George voice)
+- **Google TTS Voice**: `Free Voice` 
 - **TTS Model**: `eleven_multilingual_v2`
 
 ### Processing Pipeline
 
 1. **Scraping**: Firecrawl extracts blog content as markdown
 2. **Summarization**: Gemini AI creates a 2000-character podcast script
-3. **Audio Generation**: ElevenLabs converts text to speech
+3. **Audio Generation**: Google TTS converts text to speech
 4. **Output**: Streamlit serves audio player and download button
 
 ## ⚙️ Configuration
@@ -139,7 +132,6 @@ Create `.streamlit/secrets.toml`:
 
 ```toml
 GEMINI_API_KEY = "your-key-here"
-ELEVENLABS_API_KEY = "your-key-here"
 FIRECRAWL_API_KEY = "your-key-here"
 ```
 
